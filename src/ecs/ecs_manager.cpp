@@ -113,6 +113,7 @@ void bitox::ecs::ecs_manager::update()
 {
 	for (auto&& sys : systems_)
 	{
+		sys->before_update();
 		for (auto&& target_component : components_[sys->target_component_name_])
 		{
 			id_t owner = target_component->get_entity();
@@ -124,5 +125,6 @@ void bitox::ecs::ecs_manager::update()
 			if (!work_with_component) continue;
 			sys->on_component_update(target_component);
 		}
+		sys->after_update();
 	}
 }

@@ -18,7 +18,10 @@ namespace bitox::ecs
 	public:
 
 		system(const std::string& target_component_name, const std::initializer_list<std::string>& other_required_components_names = {});
-		virtual void on_component_update(component* component_) = 0;
+
+		virtual void before_update() {};
+		virtual void on_component_update(component* component_) {};
+		virtual void after_update() {};
 
 	};
 }
