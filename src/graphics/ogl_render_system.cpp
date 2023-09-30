@@ -28,8 +28,6 @@ const char* fragmentShaderSource = "#version 330 core\n"
 "	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);"
 "}\0";
 
-
-
 bitox::graphics::ogl_render_system::ogl_render_system()
 	: system{ "ogl_renderer" }
 {
@@ -55,13 +53,12 @@ bitox::graphics::ogl_render_system::ogl_render_system()
 
 void bitox::graphics::ogl_render_system::before_update()
 {
-	program->use();
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(1, 0, 0, 1);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 void bitox::graphics::ogl_render_system::on_component_update(ecs::component* component)
 {
-
+	program->use();
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 }

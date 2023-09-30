@@ -1,6 +1,10 @@
 #include "bitox/ecs/ecs_manager.hpp"
 #include "bitox/engine/state.hpp"
 
+#include <iostream>
+
+bitox::ecs::ecs_manager* bitox::ecs::ecs_manager::instance_ = nullptr;
+
 bitox::ecs::ecs_manager::~ecs_manager()
 {
 	for (auto&& i : entity_ids_)
@@ -24,6 +28,7 @@ void  bitox::ecs::ecs_manager::remove_system(const system* sys)
 
 id_t bitox::ecs::ecs_manager::create_entity()
 {
+	std::cout << entity_next_id_ << std::endl << this << std::endl;
 	entity_ids_[entity_next_id_] = std::vector<component*>{};
 	return entity_next_id_++;
 }

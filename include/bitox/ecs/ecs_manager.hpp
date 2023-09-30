@@ -6,6 +6,7 @@
 
 #include <map>
 #include <vector>
+#include <assert.h>
 
 namespace bitox::ecs
 {
@@ -17,7 +18,7 @@ namespace bitox::ecs
 		std::map<std::string, std::vector<component*>> components_; //  -/
 
 		std::vector<system*> systems_;
-
+		static ecs_manager* instance_;
 		id_t entity_next_id_ = 0;
 
 	public:
@@ -40,3 +41,5 @@ namespace bitox::ecs
 		~ecs_manager();
 	};
 }
+
+ 

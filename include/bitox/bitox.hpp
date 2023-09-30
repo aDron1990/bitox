@@ -8,3 +8,6 @@
 #include "bitox/engine/window.hpp"
 
 #include "bitox/graphics/ogl_render_system.hpp"
+#include "bitox/graphics/ogl_renderer.hpp"
+
+#include "bitox/game/game_object.hpp"
