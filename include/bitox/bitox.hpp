@@ -11,3 +11,4 @@
 #include "bitox/graphics/ogl_renderer.hpp"
 
 #include "bitox/game/game_object.hpp"
+#include "bitox/game/transform.hpp"

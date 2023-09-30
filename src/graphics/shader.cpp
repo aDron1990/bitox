@@ -1,6 +1,7 @@
 #include "bitox/graphics/shader.hpp"
 
 #include <GL/glew.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <fstream>
 #include <iostream>
@@ -59,4 +60,9 @@ unsigned int bitox::graphics::shader::compile_program_(const std::string& vertex
 void bitox::graphics::shader::use()
 {
 	glUseProgram(program_id);
+}
+
+void bitox::graphics::shader::set_matrix4(const std::string& name, const glm::mat4& matrix)
+{
+	glUniformMatrix4fv(glGetUniformLocation(program_id, name.c_str()), 1, GL_FALSE, glm::value_ptr(matrix));
 }

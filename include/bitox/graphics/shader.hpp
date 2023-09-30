@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <glm/glm.hpp>
 
 namespace bitox::graphics
 {
@@ -17,6 +18,8 @@ namespace bitox::graphics
 		shader(const std::string& vertex_code, const std::string& fragment_code);
 
 		void use();
+
+		void set_matrix4(const std::string& name, const glm::mat4& matrix);
 
 	};
 }
