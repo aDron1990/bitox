@@ -8,6 +8,7 @@ bitox::application::application()
 {
 	glfwInit();
 	state.window_ = std::make_shared<window>( 800, 600, "test" );
+	state.ecs_ = std::make_shared<ecs::ecs_manager>();
 }
 
 bitox::application::~application()
@@ -20,6 +21,7 @@ void bitox::application::run()
 	while (running)
 	{
 		glfwPollEvents();
+		state.ecs_->update();
 		state.window_->swap_buffers();
 	}
 }

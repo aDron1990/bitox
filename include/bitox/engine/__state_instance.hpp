@@ -2,7 +2,4 @@
 
 #include "state.hpp"
 
-namespace 
-{	
-	bitox::state_t state;
-}
+extern bitox::state_t state;
