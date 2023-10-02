@@ -23,5 +23,5 @@ namespace bitox
 
     };
 
-    application* create_app(int argc, char** argv);
+    extern application* create_app(int argc, char** argv);
 }

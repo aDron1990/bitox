@@ -12,7 +12,7 @@ namespace bitox::graphics
 	public:
 
 		ogl_renderer() : component{ "ogl_renderer" } {};
-		std::unique_ptr<shader> shader;
+		std::unique_ptr<shader> program;
 
 
 	};

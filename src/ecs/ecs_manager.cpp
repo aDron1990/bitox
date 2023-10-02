@@ -2,6 +2,7 @@
 #include "bitox/engine/state.hpp"
 
 #include <iostream>
+#include <algorithm>
 
 bitox::ecs::ecs_manager* bitox::ecs::ecs_manager::instance_ = nullptr;
 
@@ -23,16 +24,17 @@ void  bitox::ecs::ecs_manager::add_system(system* sys)
 
 void  bitox::ecs::ecs_manager::remove_system(const system* sys)
 {
+    std::find(systems_.begin(), systems_.end(), sys);
 	systems_.erase(std::find(systems_.begin(), systems_.end(), sys));
 }
 
-id_t bitox::ecs::ecs_manager::create_entity()
+lid_t bitox::ecs::ecs_manager::create_entity()
 {
 	entity_ids_[entity_next_id_] = std::vector<component*>{};
 	return entity_next_id_++;
 }
 
-void bitox::ecs::ecs_manager::destroy_entity(id_t entity_id)
+void bitox::ecs::ecs_manager::destroy_entity(lid_t entity_id)
 {
 	for (auto& it : entity_ids_[entity_id])
 	{
@@ -59,7 +61,7 @@ void bitox::ecs::ecs_manager::destroy_component(const std::string& component_nam
 	components_.erase(it->first);
 }
 
-void bitox::ecs::ecs_manager::add_component(id_t entity_id, component* component)
+void bitox::ecs::ecs_manager::add_component(lid_t entity_id, component* component)
 {
 	if (entity_ids_.find(entity_id) != entity_ids_.end())
 	{
@@ -79,7 +81,7 @@ void bitox::ecs::ecs_manager::add_component(id_t entity_id, component* component
 	}
 }
 
-void bitox::ecs::ecs_manager::remove_component(id_t entity_id, const std::string& component_name)
+void bitox::ecs::ecs_manager::remove_component(lid_t entity_id, const std::string& component_name)
 {
 	if (entity_ids_.find(entity_id) != entity_ids_.end())
 	{
@@ -97,7 +99,7 @@ void bitox::ecs::ecs_manager::remove_component(id_t entity_id, const std::string
 	}
 }
 
-bitox::ecs::component* bitox::ecs::ecs_manager::get_component(id_t entity_id, const std::string& component_name)
+bitox::ecs::component* bitox::ecs::ecs_manager::get_component(lid_t entity_id, const std::string& component_name)
 {
 	if (entity_ids_.find(entity_id) != entity_ids_.end())
 	{
@@ -120,7 +122,7 @@ void bitox::ecs::ecs_manager::update()
 		sys->before_update();
 		for (auto&& target_component : components_[sys->target_component_name_])
 		{
-			id_t owner = target_component->get_entity();
+			lid_t owner = target_component->get_entity();
 			bool work_with_component = true;
 			for (auto&& other_component : sys->other_required_components_names_)
 			{
