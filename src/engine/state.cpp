@@ -17,3 +17,8 @@ std::shared_ptr<bitox::ecs::ecs_manager> bitox::get_ecs()
 {
     return state.ecs_;
 }
+
+std::shared_ptr<bitox::input_system> bitox::get_input()
+{
+    return state.input_;
+}

@@ -41,5 +41,3 @@ namespace bitox::ecs
 		~ecs_manager();
 	};
 }
-
- 
