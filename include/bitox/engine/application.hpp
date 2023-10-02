@@ -18,6 +18,9 @@ namespace bitox
 
         void run();
 
+        virtual void on_close() { close(); };
+        void close() { running = false; };
+
     };
 
     application* create_app(int argc, char** argv);
